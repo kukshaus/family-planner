@@ -99,6 +99,7 @@ export interface Reward {
   description?: string;
   pointsCost: number;
   icon?: string;
+  category?: string;
   available: boolean;
   familyId: string;
   createdAt: string;
