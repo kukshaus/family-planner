@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import "@/lib/initializeApp";
 
 export const metadata: Metadata = {
   title: "Family Planner - Organize Your Family Life",

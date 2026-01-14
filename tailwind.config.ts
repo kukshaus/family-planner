@@ -9,20 +9,41 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: {
-          DEFAULT: '#6366F1',
-          light: '#818CF8',
-          dark: '#4F46E5',
+        // Neutral grays (slate-based) for Stripe aesthetic
+        neutral: {
+          50: '#F8FAFC',
+          100: '#F1F5F9',
+          200: '#E2E8F0',
+          300: '#CBD5E1',
+          400: '#94A3B8',
+          500: '#64748B',
+          600: '#475569',
+          700: '#334155',
+          800: '#1E293B',
+          900: '#0F172A',
+          950: '#020617',
         },
-        secondary: {
-          DEFAULT: '#EC4899',
-          light: '#F472B6',
-          dark: '#DB2777',
+        // Subtle purple accent (primary CTA)
+        accent: {
+          DEFAULT: '#8B5CF6',
+          light: '#A78BFA',
+          dark: '#7C3AED',
+          50: '#FAF5FF',
+          100: '#F3E8FF',
         },
-        success: '#10B981',
-        warning: '#F59E0B',
-        error: '#EF4444',
-        info: '#3B82F6',
+        // Subtle blue accent (secondary)
+        blue: {
+          DEFAULT: '#3B82F6',
+          light: '#60A5FA',
+          dark: '#2563EB',
+          50: '#EFF6FF',
+          100: '#DBEAFE',
+        },
+        // Muted semantic colors
+        success: '#059669',
+        warning: '#D97706',
+        error: '#DC2626',
+        info: '#0284C7',
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
@@ -40,8 +61,13 @@ const config: Config = {
         'card-desktop': '16px',
       },
       boxShadow: {
+        'sm': '0 1px 2px 0 rgb(0 0 0 / 0.05)',
+        'md': '0 4px 6px -1px rgb(0 0 0 / 0.1)',
+        'lg': '0 10px 15px -3px rgb(0 0 0 / 0.1)',
+        'xl': '0 20px 25px -5px rgb(0 0 0 / 0.1)',
         'card': '0 1px 3px rgba(0,0,0,0.1)',
         'card-hover': '0 4px 12px rgba(0,0,0,0.15)',
+        'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.07)',
       },
     },
   },
