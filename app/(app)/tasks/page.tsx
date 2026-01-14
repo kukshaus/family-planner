@@ -308,141 +308,193 @@ export default function TasksPage() {
         )}
       </div>
 
-      {/* Add Task Modal */}
+      {/* Add Task Modal - Stripe Inspired */}
       {showAddModal && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <GlassCard className="w-full max-w-md p-6 max-h-[90vh] overflow-y-auto">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-heading font-bold text-gray-900 dark:text-white">
-                Add New Task
-              </h2>
-              <button
-                onClick={() => setShowAddModal(false)}
-                className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Task Title *
-                </label>
-                <input
-                  type="text"
-                  value={newTask.title}
-                  onChange={(e) => setNewTask({ ...newTask, title: e.target.value })}
-                  className="input-modern"
-                  placeholder="Enter task title"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Description
-                </label>
-                <textarea
-                  value={newTask.description}
-                  onChange={(e) => setNewTask({ ...newTask, description: e.target.value })}
-                  className="input-modern min-h-[80px]"
-                  placeholder="Enter task description"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Assign To *
-                </label>
-                <select
-                  value={newTask.assignedTo}
-                  onChange={(e) => setNewTask({ ...newTask, assignedTo: e.target.value })}
-                  className="input-modern"
-                >
-                  <option value="">Select person</option>
-                  {users.map(user => (
-                    <option key={user._id} value={user._id}>
-                      {user.avatar} {user.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Priority
-                  </label>
-                  <select
-                    value={newTask.priority}
-                    onChange={(e) => setNewTask({ ...newTask, priority: e.target.value as any })}
-                    className="input-modern"
-                  >
-                    <option value="low">Low</option>
-                    <option value="medium">Medium</option>
-                    <option value="high">High</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Points
-                  </label>
-                  <input
-                    type="number"
-                    value={newTask.points}
-                    onChange={(e) => setNewTask({ ...newTask, points: parseInt(e.target.value) || 0 })}
-                    className="input-modern"
-                    min="0"
-                  />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Due Date
-                  </label>
-                  <input
-                    type="date"
-                    value={newTask.dueDate}
-                    onChange={(e) => setNewTask({ ...newTask, dueDate: e.target.value })}
-                    className="input-modern"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Due Time
-                  </label>
-                  <input
-                    type="time"
-                    value={newTask.dueTime}
-                    onChange={(e) => setNewTask({ ...newTask, dueTime: e.target.value })}
-                    className="input-modern"
-                  />
-                </div>
-              </div>
-
-              <div className="flex gap-3 pt-4">
-                <Button
-                  variant="secondary"
-                  className="flex-1"
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-md z-50 flex items-center justify-center p-4 animate-fade-in">
+          <div 
+            className="w-full max-w-lg animate-scale-in"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal Card */}
+            <div className="relative bg-white dark:bg-gray-900 rounded-3xl shadow-2xl border border-gray-200 dark:border-gray-800 overflow-hidden">
+              {/* Gradient Header */}
+              <div className="relative h-32 bg-gradient-to-br from-primary-500 via-primary-600 to-secondary-500 overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary-500/20 via-transparent to-secondary-500/20" />
+                <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZ3JpZCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNIDQwIDAgTCAwIDAgMCA0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLW9wYWNpdHk9IjAuMDUiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmlkKSIvPjwvc3ZnPg==')] opacity-30" />
+                
+                {/* Close Button */}
+                <button
                   onClick={() => setShowAddModal(false)}
+                  className="absolute top-4 right-4 p-2 rounded-xl bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 text-white transition-all hover:scale-110 active:scale-95"
                 >
-                  Cancel
-                </Button>
-                <Button
-                  variant="gradient"
-                  className="flex-1"
-                  onClick={handleCreate}
-                  disabled={!newTask.title || !newTask.assignedTo}
-                >
-                  Add Task
-                </Button>
+                  <X className="w-5 h-5" />
+                </button>
+
+                {/* Icon */}
+                <div className="absolute -bottom-8 left-8">
+                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 shadow-xl flex items-center justify-center border-4 border-white dark:border-gray-900">
+                    <Plus className="w-8 h-8 text-primary-500" strokeWidth={2.5} />
+                  </div>
+                </div>
+              </div>
+
+              {/* Content */}
+              <div className="p-8 pt-14 max-h-[calc(90vh-8rem)] overflow-y-auto custom-scrollbar">
+                <h2 className="text-3xl font-heading font-bold text-gray-900 dark:text-white mb-2">
+                  Add New Task
+                </h2>
+                <p className="text-gray-600 dark:text-gray-400 mb-8">
+                  Create a new task and assign it to a family member
+                </p>
+
+                <div className="space-y-6">
+                  {/* Task Title */}
+                  <div className="space-y-2">
+                    <label className="block text-sm font-semibold text-gray-900 dark:text-white">
+                      Task Title <span className="text-error-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      value={newTask.title}
+                      onChange={(e) => setNewTask({ ...newTask, title: e.target.value })}
+                      className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all placeholder:text-gray-400 dark:placeholder:text-gray-600 font-medium"
+                      placeholder="e.g., Clean the kitchen"
+                      autoFocus
+                    />
+                  </div>
+
+                  {/* Description */}
+                  <div className="space-y-2">
+                    <label className="block text-sm font-semibold text-gray-900 dark:text-white">
+                      Description
+                    </label>
+                    <textarea
+                      value={newTask.description}
+                      onChange={(e) => setNewTask({ ...newTask, description: e.target.value })}
+                      className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all placeholder:text-gray-400 dark:placeholder:text-gray-600 min-h-[100px] resize-none"
+                      placeholder="Add any details or instructions..."
+                    />
+                  </div>
+
+                  {/* Assign To */}
+                  <div className="space-y-2">
+                    <label className="block text-sm font-semibold text-gray-900 dark:text-white">
+                      Assign To <span className="text-error-500">*</span>
+                    </label>
+                    <select
+                      value={newTask.assignedTo}
+                      onChange={(e) => setNewTask({ ...newTask, assignedTo: e.target.value })}
+                      className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all font-medium appearance-none cursor-pointer"
+                      style={{
+                        backgroundImage: `url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%236366F1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")`,
+                        backgroundRepeat: 'no-repeat',
+                        backgroundPosition: 'right 1rem center',
+                        paddingRight: '3rem'
+                      }}
+                    >
+                      <option value="">Select a family member</option>
+                      {users.map(user => (
+                        <option key={user._id} value={user._id}>
+                          {user.avatar} {user.name} ({user.role})
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {/* Priority & Points Grid */}
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <label className="block text-sm font-semibold text-gray-900 dark:text-white">
+                        Priority
+                      </label>
+                      <select
+                        value={newTask.priority}
+                        onChange={(e) => setNewTask({ ...newTask, priority: e.target.value as any })}
+                        className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all font-medium appearance-none cursor-pointer"
+                        style={{
+                          backgroundImage: `url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%236366F1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")`,
+                          backgroundRepeat: 'no-repeat',
+                          backgroundPosition: 'right 1rem center',
+                          paddingRight: '2.5rem'
+                        }}
+                      >
+                        <option value="low">🟢 Low</option>
+                        <option value="medium">🟡 Medium</option>
+                        <option value="high">🔴 High</option>
+                      </select>
+                    </div>
+
+                    <div className="space-y-2">
+                      <label className="block text-sm font-semibold text-gray-900 dark:text-white">
+                        Points
+                      </label>
+                      <div className="relative">
+                        <input
+                          type="number"
+                          value={newTask.points}
+                          onChange={(e) => setNewTask({ ...newTask, points: parseInt(e.target.value) || 0 })}
+                          className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all font-medium pr-12"
+                          min="0"
+                          max="999"
+                        />
+                        <div className="absolute right-4 top-1/2 -translate-y-1/2 text-warning-500 font-bold text-sm">
+                          pts
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Date & Time Grid */}
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <label className="block text-sm font-semibold text-gray-900 dark:text-white">
+                        Due Date
+                      </label>
+                      <input
+                        type="date"
+                        value={newTask.dueDate}
+                        onChange={(e) => setNewTask({ ...newTask, dueDate: e.target.value })}
+                        className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all font-medium"
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <label className="block text-sm font-semibold text-gray-900 dark:text-white">
+                        Due Time
+                      </label>
+                      <input
+                        type="time"
+                        value={newTask.dueTime}
+                        onChange={(e) => setNewTask({ ...newTask, dueTime: e.target.value })}
+                        className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all font-medium"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Footer */}
+              <div className="px-8 py-6 bg-gray-50 dark:bg-gray-800/50 border-t border-gray-200 dark:border-gray-800">
+                <div className="flex gap-3">
+                  <Button
+                    variant="secondary"
+                    className="flex-1"
+                    onClick={() => setShowAddModal(false)}
+                  >
+                    Cancel
+                  </Button>
+                  <Button
+                    className="flex-1 bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white font-semibold shadow-lg shadow-primary-500/30 hover:shadow-xl hover:shadow-primary-500/40 disabled:opacity-50 disabled:cursor-not-allowed"
+                    onClick={handleCreate}
+                    disabled={!newTask.title || !newTask.assignedTo}
+                  >
+                    <Plus className="w-5 h-5 mr-2" />
+                    Create Task
+                  </Button>
+                </div>
               </div>
             </div>
-          </GlassCard>
+          </div>
         </div>
       )}
     </div>

@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Calendar, CheckSquare, Trophy, Utensils, Image, ListChecks, Moon, Settings, Home, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Calendar, CheckSquare, Trophy, Utensils, Image, ListChecks, Moon, Settings, Home, ChevronLeft, ChevronRight, Database } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const navigation = [
@@ -16,6 +16,7 @@ const navigation = [
   { name: 'Lists', href: '/lists', icon: ListChecks },
   { name: 'Sleep', href: '/sleep', icon: Moon },
   { name: 'Settings', href: '/settings', icon: Settings },
+  { name: 'Dev Tools', href: '/dev-tools', icon: Database },
 ];
 
 interface SidebarProps {
